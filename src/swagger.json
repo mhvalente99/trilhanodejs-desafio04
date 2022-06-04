@@ -97,6 +97,86 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all users",
+        "description": "Just users ```admin``` can use this route",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "e58a970b-1352-425b-99f3-9604c2c1dba9"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Matheus"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "matheus@example.com.br"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-05-25T00:24:49.325Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-05-25T00:24:49.325Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "This user is not admin!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
       }
     }
   }
